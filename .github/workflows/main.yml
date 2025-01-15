@@ -25,34 +25,13 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-        # this will use the latest LTS version of Node.js
-        # if you need a specific version, replace ${{ env.NODE_VERSION }} with that version number
-        
-      - name: Get npm cache directory
-        id: npm-cache-dir
-        run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-        
-      - name: Cache npm dependencies
-        uses: actions/cache@v4
-        id: npm-cache
-        with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-        # caches dependencies and other commonly re-used files
-        # so they do not need to be re-installed on each run
-        
-      - name: Install dependencies and build site
-        run: |
-          npm ci --force
-          npm run build
-        
-      - name: Deploy to Neocities
-        uses: bcomnes/deploy-to-neocities@master
+          node-version: "18"
+          cache: "yarn"
+      - run: yarn install
+      - run: yarn build
+
+      - uses: bcomnes/deploy-to-neocities@master
         with:
           api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
           cleanup: true
           dist_dir: site
-        # if dist_dir is within a subfolder, update the filepath to reflect that
