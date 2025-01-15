@@ -46,7 +46,7 @@ jobs:
         
       - name: Install dependencies and build site
         run: |
-          npm ci
+          npm ci --force
           npm run build
         
       - name: Deploy to Neocities
