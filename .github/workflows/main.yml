@@ -1,7 +1,5 @@
-- name: Deploy to Neocities
-  # Don't use master, use a full 40 character commit hash, e.g.,
-  # jonchang/deploy-neocities@deadbeef...
-  uses: jonchang/deploy-neocities@master
+- name: Deploy to Neocities using Ruby CLI
+  uses: jonchang/deploy-neocities@v1
   with:
     # Required, to access Neocities API.
     # https://neocities.org/settings
