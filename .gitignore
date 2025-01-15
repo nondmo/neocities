@@ -1,4 +1,6 @@
-
+.git
+.github
+.gitignore
 *.mp*
 *.ogg
 *.wav
