@@ -51,6 +51,10 @@ p {
     font-family: RobotoMono;
 }
 
+img {
+    line-spacing: 0;
+}
+
 li {
     font-size: 9pt;
     font-family: RobotoMono;
