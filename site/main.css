@@ -51,6 +51,14 @@ p {
     font-family: RobotoMono;
 }
 
+a {
+    font-size: 9pt;
+    font-family: RobotoMono;
+    font-weight: bold;
+    color: #d09639;
+    text-decoration:wavy;
+}
+
 img {
     line-spacing: 0;
 }
