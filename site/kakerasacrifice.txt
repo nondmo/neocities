@@ -9,10 +9,11 @@ Let's make a game!
     version:1
 
 Settings
-    background:http://nondmo.neocities.org/assets/bgs/radcarpet.png
+    background:http://nondmo.neocities.org/assets/bgs/squares.png
     building cost increase:115%
     building cost refund:50%
     spritesheet:kakeraIcons, 48 by 48, http://nondmo.neocities.org/assets/kakerasprites.png
+    spritesheet:buildingIcons, 48 by 48, http://nondmo.neocities.org/assets/buildingIcons.png
     stylesheet:https://orteil.dashnet.org/igm/stuff/basic.css
 
 Layout
