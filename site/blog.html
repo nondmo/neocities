@@ -1,82 +1,75 @@
-<!DOCTYPE html>
-<html>
+<head>
+  <script src="scripts.js"></script>
+  <link rel="stylesheet" href="main.css">
+  </head>
+  
+  <body>
+  <div class="container"> <!--holds the content section, and both sidebar sections-->
+  <div class="column"> <!--main content section/frame-->
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>non dmo zone</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="./assets/fav.ico">
+    <h2>public diary</h2>
 
-</head>
+<h4>okay I think I'm getting the hang of the webdev process</h4>
+<h5>January 16 2025</h5>
+<p>New layout & some widgets! Liking the overall look of things, it's mine and not based on any one template (def inspired by a few other sites I've seen though) and I'm super proud of it so far. (✿◡‿◡) I should definitely switch things over to a private repository. I know everyone's going to be able to see this anyway, but it might be better just in practice.</p>
+<hr style="width: 75%; border: 1px dotted #444444;">
 
-<body>
-
-
-<div id="all">
-
-<div id="container">
-
-<div id="header">
-
-<div id="nav">
-<a href="index.html">index</a>
-<a href="blog.html">blog</a>
-<a href="interests.html">interests</a>
-<a href="http://nondmo.tumblr.com">tumblr</a>
-<a href="http://rabbitholeperson.substack.com">substack</a>
-<a href="https://www.last.fm/user/nondmo">last.fm</a>
-
-
-</div>
-
-<h1 style="font-family: 'STRunes';">bite back in anger</h1></div>
-
-<div id="content">
-
-  <h2>does the ruby gem work</h2>
-  <h3>January 15 2025</h3>
+  <h4>does the ruby gem work</h4>
+  <h5>January 15 2025</h5>
   <p><em>If you're seeing this, then the ruby gem works! No idea what went wrong with the Github action.</em><br/>In other news, the Discord server's JPEG trading card game has developed a pantheon. May The Giant Rat Who Makes All of the Rules, Monkey Blue, and Uta bless our rolls.</p>
   <hr style="width: 75%; border: 1px dotted #444444;">
 
-<h2>genuinely lucky</h2>
-<h3>January 14 2025</h3>
+<h4>genuinely lucky</h4>
+<h5>January 14 2025</h5>
 <p>That's all.<br/><em>Aside: damn, Neocities whips. This shit is fun as hell.</em>
 </p>
 <hr style="width: 75%; border: 1px dotted #444444;">
 
-<h2>great googly moogly it's all gone to shit</h2>
-<h3>January 13 2025</h3>
+<h4>great googly moogly it's all gone to shit</h4>
+<h5>January 13 2025</h5>
 <p>Hey so does anyone know why we're working so hard? Like genuinely, what are we doing all of this for? 
 </p>
 <hr style="width: 75%; border: 1px dotted #444444;">
 
-<h2>The Cream of the Crop</h2>
-<h3>January 11 2025</h3>
+<h4>The Cream of the Crop</h4>
+<h5>January 11 2025</h5>
 <p>The cream rises to the top. Waiting on a delivery, attending a belated Christmas party.</p>
 <hr style="width: 75%; border: 1px dotted #444444;">
 
-<h2>The Taco Bell Tolls For Thee</h2>
-<h3>January 10 2025</h3>
+<h4>The Taco Bell Tolls For Thee</h4>
+<h5>January 10 2025</h5>
 <p>None of the Taco Bells around me will deliver, and I can't order the nuggets from the ones that <em>do</em> deliver.</p>
 <hr style="width: 75%; border: 1px dotted #444444;">
 
-<h2>Site Update: Theme & Blog</h2>
-<h3>January 9 2025</h3>
+<h4>Site Update: Theme & Blog</h4>
+<h5>January 9 2025</h5>
 <p><em>Finally</em> got around to setting up this page! Figured it may be nice to have an old-school blog that's a bit more lowkey than a Substack post. And, frankly, I'm enamored with the ways that the old internet (per se) is creeping back into the mainstream. Delightful to see&mdash;excited to be a part of it.</p>
 <hr style="width: 75%; border: 1px dotted #444444;">
 
 
 </div>
 
-<div id="bottom"></div>
-
+<!-- footer/sidebar starts here!! -->
+<div class="topbar"> <!--links & nav-->
+<a href="index.html"><img src="./assets/btn/index.gif"></a><br/>
+<a href="blog.html"><img src="./assets/btn/blog.gif"></a><br/>
+<a href="interests.html"><img src="./assets/btn/interests.gif"></a><br/>
+<a href="http://nondmo.tumblr.com"><img src="./assets/btn/tumblr.gif"></a><br/>
+<a href="http://rabbitholeperson.substack.com"><img src="./assets/btn/substack.gif"></a><br/>
+<a href="https://www.last.fm/user/nondmo"><img src="./assets/btn/lastfm.gif"></a><br/><br/>
+<P><span id="counter"><!-- FC2 Counter  Starts here -->
+    <script language="javascript" type="text/javascript" src="http://counter1.fc2.com/counter.php?id=40189417&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=40189417&main=1" /></noscript>
+    <!-- FC2 Counter  Ends here --></span><br/><a href="https://tamanotchi.world/18887c"><img src="https://tamanotchi.world/i/18887" alt="It's tamaNOTchi! Click to feed!"></a></P>
+</div>
+<div class="bottombar"> <!--last.fm now playing-->
+<div id="tapes"><p>currently listening to<br/>
+<span id="lastfm" class="roboto">white noise</span>.</p>
+<p align="center"><img width="70%" src="./assets/cassette.png"></p>
+<p id="tamanotchi"></p>
+</div>
 </div>
 
 </div>
-
-<div id="credit"><a href="https://repth.neocities.org/index.html">@Repth</a></div>
+</div>
 
 </body>
-
-</html>

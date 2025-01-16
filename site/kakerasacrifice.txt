@@ -1,0 +1,163 @@
+// hosted at https://orteil.dashnet.org/igm/?g=http://nondmo.neocities.org/kakerasacrifice.txt
+
+Let's make a game!
+    name:Kakera Sacrifice
+    by: Deanna
+    desc: Earn and sacrifice kakera to curry favor with our patron gods, The Giant Rat That Makes All of the Rules, Monkey Blue, and Uta.
+    created:16/1/2025
+    updated:16/1/2025
+    version:1
+
+Settings
+    background:http://nondmo.neocities.org/assets/bgs/radcarpet.png
+    building cost increase:115%
+    building cost refund:50%
+    spritesheet:kakeraIcons, 48 by 48, http://nondmo.neocities.org/assets/kakerasprites.png
+    stylesheet:https://orteil.dashnet.org/igm/stuff/basic.css
+
+Layout
+    use default
+
+Buttons
+    *kakeraButton
+        name:Earn Kakera
+        desc:Click to earn kakera.
+        on click:anim icon wobble
+        on click:yield 1 kakera
+        on click:if (have goldenTouch and chance(1%)) yield 1 lightKakera
+        icon:http://nondmo.neocities.org/assets/kakera.png
+        no text
+        class:bigButton
+        icon class:shadowed
+        tooltip origin:bottom
+        tooltip class:red
+
+Resources
+    *kakera|kakeras
+        name:Kakera|Kakera
+        desc:These are your kakera gems. You can sacrifice them to appease our gods.
+        icon:kakeraIcons[0,0]
+        class:noBackground
+        show earned
+    *lightKakera|lightKakeras
+        name:Light Kakera|Light Kakera
+        desc:Light kakera are rare, spend them wisely!
+        icon:kakeraIcons[1,0]
+        class:noBackground
+        hidden when 0
+
+Shinies
+    *rainbowKakera
+        on click:log Woop
+        movement:onRight moveLeft fade bounce:0.05
+        frequency:60
+        frequency variation:30
+        icon:http://nondmo.neocities.org/assets/rainbowkakera.png
+        class:bigButton
+        on click:
+            $boost=1
+            if (have lightKakera) $boost=4
+            if (chance(25%))
+                //get at least 7, or between 1 and 3 minutes of extra kakera production
+                $amount=max(7,random(kakeras:ps*60*1,kakeras:ps*60*3))*$boost
+                toast Lucky you! Gained<//><b>[$amount] kakera</b>.
+                yield $amount kakeras
+            else
+                $amount=1*$boost
+                toast You unearthed<//><b>[$amount] light kakera[s?$amount]</b>!
+                yield $amount lightKakera
+            end
+        end
+
+Buildings
+    *TEMPLATE
+        on click:anim glow
+    
+    *purplekakera|purplekakeras
+        name:Purple Kakera|Purple Kakera
+        desc: The smallest amount of kakera you can earn.<//>Produces <b>10 kakera</b> every <b>10 seconds</b>
+        icon:kakeraIcons[1,0]
+        cost:15 kakeras
+        on tick:yield 0.1 kakera
+        unlocked
+    
+    *bluekakera|bluekakeras
+        name:Blue Kakera|Blue Kakera
+        desc: Just a step up from purple.<//>Produces <b>1 kakera</b> every <b>2 seconds</b>
+        icon:kakeraIcons[0,0]
+        cost:100 kakeras
+        on tick:yield 0.5 kakeras
+        req:100 kakeras:earned
+
+Upgrades
+    *TEMPLATE
+        on click:anim glow
+
+    //color upgrades
+
+    *tealkakera
+        name:Teal Kakera
+        desc:Lets you earn a little more off the top.<//><b>Effect:</b><.>+1 kakera per click
+        icon:kakeraIcons[0,2]
+        cost:100 kakeras
+        passive:increase kakera yield of kakeraButton by 1
+        req:10 kakera:earned
+    
+    *greenkakera
+        name:Green Kakera
+        desc:Upgrades your gems just a bit more.<//><b>Effect:</b><.>+1 kakera per click
+        icon:kakeraIcons[1,2]
+        cost:200 kakeras
+        passive:increase yield of kakeraButton by 1
+        req:50 kakeras:earned
+
+    *orangekakera
+        name:Orange Kakera
+        desc:Welcome to the big leagues.<//><b>Effect:</b><.>kakera/click x2<,> kakera production +5%
+        icon:kakeraIcons[2,2]
+        cost:3000 kakeras
+        passive:multiply kakera yield of kakeraButton by 2
+        passive:multiply yield of kakeras by 1.05
+        req:1000 kakeras:earned
+
+    *redkakera
+        name: Red Kakera
+        desc: That's it, there's no more after this.<//><b>Effect:</b><.>kakera/click x1.5<,> kakera production +5%
+        icon:kakeraIcons[3,2]
+        cost:10000 kakeras
+        passive:multiply kakera yield of kakeraButton by 1.5
+        passive:multiply yield of kakeras by 1.05
+        req:10000 kakeras:earned
+
+    //kakera upgrade
+
+    *buildingUpgrade1
+        name:Yellow Kakera
+        desc:Your blue kakera are now yellow. SAPPHIRE IV<//><b>Effect:</b><.>+1 kakera per click
+        icon:kakeraIcons[0,3]
+        cost:100 kakeras
+        passive:multiply yield of kakera by 5
+        req:(bluekakera>=50)
+
+    //sacrifices
+    
+    *buildingUpgrade2
+        name:Appease The Rat
+        desc:Make a sacrifice in honor of The Giant Rat That Makes all of The Rules.
+        icon:buildingIcons[0,0]
+        cost:1000 kakeras
+    
+    *buildingUpgrade3
+        name:Appease Monkey Blue
+        desc:Make a sacrifice in honor of Monkey Blue.
+        icon:buildingIcons[1,0]
+        cost:1000 kakeras
+
+    //light kakera upgrade
+	
+	*goldenTouch
+		name:Golden Kakera
+		desc:The delicate art of finding kakera made of precious metals.<//><b>Effect:</b><.>1% chance of gaining 1 golden kakera per click.
+		icon:kakeraIcons[0,3]
+		cost:1 lightKakera
+		req:1 lightKakera:earned

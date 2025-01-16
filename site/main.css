@@ -6,20 +6,61 @@
     font-family: Handy;
     src: url("./assets/handy.ttf") format("truetype");
 }
+@font-face {
+    font-family: RobotoMono;
+    src: url("./assets/robotomono.ttf") format("truetype");
+}
 
 body {
     font-family: Handy;
+    background-image: url("./assets/bgs/crissXcross.png");
+    color: #ccc;
+}
+
+h1 {
+    text-shadow: 1px 1px 2px #fbc774cc;
+    font-size: 24pt;
+    line-height: 24pt;
+}
+
+h2 {
+    text-shadow: 1px 1px 1px #d09639cc;
+    line-height: 0;
+    font-size: 16pt;
+    line-height: 16pt;
+}
+
+/* for blog titles */
+h4 {
+    margin-bottom: 0;
+    line-height: 0;
+    font-size: 12pt;
+    line-height: 12pt;
+}
+
+/* for blog dates */
+h5 {
+    margin-bottom: 0;
+    line-height: 0;
+    font-size: 9pt;
+    line-height: 9pt;
 }
 
 p {
     font-size: 9pt;
+    font-family: RobotoMono;
+}
+
+li {
+    font-size: 9pt;
+    font-family: RobotoMono;
 }
 
 .container {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
-    gap: 5px;
+    gap: 0px;
 }
 
 .column {
@@ -29,22 +70,55 @@ p {
     grid-row-start: 3;
     overflow:scroll;
     max-height: 400px;
+    background-image: url("./assets/bgs/black_paper.png");
+    padding: 25px;
+    border: 2px dashed #444;
+    border-radius: 5px;
 }
 
 .topbar {
     grid-row: span 2 / span 2;
     grid-column-start: 6;
     grid-row-start: 3;
-    max-height: 200px;
-    overflow: scroll;
+    max-height: 195px;
+    max-width: 200px;
+    overflow: none;
+    text-align: center;
+    background-image: url("./assets/bgs/black_paper.png");
+    padding: 15px;
+    border-left: none;
+    border-right: 2px dashed #444;
+    border-top: 2px dashed #444;
+    border-bottom: 2px dashed #444;
+    border-radius: 5px;
 }
+
+.topbar #counter{
+    display: inline-block;
+    text-align: right;
+}
+
 
 .bottombar {
     grid-row: span 2 / span 2;
     grid-column-start: 6;
     grid-row-start: 5;
-    max-height: 200px;
+    max-height: 195px;
+    max-width: 200px;
     overflow: scroll;
+    text-align: right;
+    background-image: url("./assets/bgs/black_paper.png");
+    padding: 15px;
+    border-left: none;
+    border-right: 2px dashed #444;
+    border-bottom: 2px dashed #444;
+    border-top: none;
+    border-radius: 5px;
+}
+
+.bottombar #tamanotchi {
+    display: inline-block;
+    justify-content: right;
 }
 
 .header {
@@ -69,9 +143,13 @@ div#tapes {
 
 .runes {
     font-family: STRunes;
+    font-weight:400;
+    letter-spacing: 5;
 }
 
-p.glyph {
-    font-family: Sjonarbok;
+.roboto {
+    font-family: RobotoMono;
+    font-weight: 300;
 }
+
 
