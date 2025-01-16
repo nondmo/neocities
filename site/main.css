@@ -1,0 +1,71 @@
+@font-face {
+    font-family: STRunes;
+    src: url("./assets/STRunes.otf") format("opentype");
+}
+@font-face {
+    font-family: Handy;
+    src: url("./assets/handy.ttf") format("truetype");
+}
+
+body {
+    font-family: Handy;
+}
+
+p {
+    font-size: 9pt;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 5px;
+}
+
+.column {
+    grid-column: span 3 / span 3;
+    grid-row: span 4 / span 4;
+    grid-column-start: 3;
+    grid-row-start: 3;
+}
+
+.topbar {
+    grid-row: span 2 / span 2;
+    grid-column-start: 6;
+    grid-row-start: 3;
+}
+
+.bottombar {
+    grid-row: span 2 / span 2;
+    grid-column-start: 6;
+    grid-row-start: 5;
+}
+
+.header {
+    grid-column: span 4 / span 4;
+    grid-column-start: 3;
+    grid-row-start: 2;
+}
+
+.footer {
+    grid-column: span 4 / span 4;
+    grid-column-start: 3;
+    grid-row-start: 7;
+}
+
+div#tapes {
+    font-size: 9pt;
+
+    span#lastfm {
+        font-size: 9pt;
+    }
+}
+
+.runes {
+    font-family: STRunes;
+}
+
+p.glyph {
+    font-family: Sjonarbok;
+}
+
