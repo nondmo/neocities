@@ -114,7 +114,7 @@ Upgrades
 
     *orangekakera
         name:Orange Kakera
-        desc:Welcome to the big leagues.<//><b>Effect:</b><.>kakera/click x2<,> kakera production +5%
+        desc:Welcome to the big leagues.<//><b>Effect:</b><.>kakera/click x2<.> kakera production +5%
         icon:kakeraIcons[2,2]
         cost:3000 kakeras
         passive:multiply kakera yield of kakeraButton by 2
