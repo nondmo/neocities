@@ -107,9 +107,9 @@ li {
     grid-row: span 2 / span 2;
     grid-column-start: 6;
     grid-row-start: 5;
-    max-height: 195px;
+    max-height: 193px;
     max-width: 200px;
-    overflow: scroll;
+    overflow: none;
     text-align: right;
     background-image: url("./assets/bgs/black_paper.png");
     padding: 15px;
