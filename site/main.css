@@ -180,18 +180,39 @@ li {
 
 div#tapes {
     font-size: 9pt;
-
     span#lastfm {
         font-size: 9pt;
     }
 }
 
+img#cassette {
+    max-width: 60%;
+    height: auto;
+    vertical-align: bottom;
+    display: table-cell;
+}
+
 .statusbox {
-    position:absolute;
-    top: 10px;
-    right: 10px;
-    background-color: red;
-    visibility: hidden;
+    font-size: 9pt;
+    font-family: RobotoMono;
+}
+
+#statuscafe {
+    color: #ccc;
+}
+
+#statuscafe-username {
+    font-family: Handy;
+}
+
+#statuscafe-username, a {
+    font-family: Handy;
+}
+
+#statuscafe-content {
+    text-align: right;
+    font-family: RobotoMono;
+    color: #ccc;
 }
 
 .runes {
