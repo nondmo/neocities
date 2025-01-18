@@ -1,0 +1,819 @@
+<!--
+MIT License
+
+Copyright (c) m15o
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>moka</title>
+    <style id="css-site">
+        @font-face {
+            font-family: RobotoMono;
+            src: url("./assets/robotomono.ttf") format("truetype");
+        }
+        body {
+            max-width: 600px;
+            background-color: #000000;
+            padding: 8px;
+            margin: 0 auto;
+            font-family: RobotoMono;
+        }
+
+        p {
+            color: #ffffff;
+        }
+
+        h1 {
+            color: #e18f89;
+        }
+
+        h2 {
+            color: #a53551;
+        }
+
+        h3 {
+            color: #e1c0a9;
+        }
+
+        header a {
+            color: #a2b3b2;
+            text-decoration: underline wavy #5f737b;
+        }
+
+        main a {
+            color: #e8e3e3;
+            text-decoration: underline double #e18f89;
+        }
+
+        pre {
+            overflow: auto;
+            background: #000000;
+            padding: 10px;
+        }
+    </style>
+    <style id="css-editor">
+        html, body, #edit, .column, textarea, table, td {
+            height: 100%;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: monospace;
+            background-color: lightgrey;
+        }
+
+        header {
+            display: flex;
+            border-top: 1px solid silver;
+            border-bottom: 1px solid silver;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            min-width: 10px;
+        }
+
+        .body, section {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .name {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 4px 6px;
+            margin: 0;
+            outline: none;
+            border: 0;
+            font-family: monospace;
+        }
+
+        #search.searching {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .active-p .content, .active-p .name {
+            background-color: white;
+        }
+
+        .active {
+            background-color: darkgrey;
+        }
+
+        textarea {
+            box-sizing: border-box;
+            padding: 4px 6px;
+            margin: 0;
+            border: 0;
+            outline: none;
+            resize: none;
+        }
+
+        .action {
+            padding: 4px 6px;
+            cursor: pointer;
+        }
+
+        .back, .forward {
+            background-color: silver;
+        }
+
+        #search, .submenu, .folded .body, .folded .h-resize, .maxed .h-resize {
+            display: none;
+        }
+
+        .maxed .body {
+            display: flex;
+        }
+
+        .folded .maxed, .maxed .body, section:last-child, section:last-child .body {
+            flex-grow: 1;
+        }
+
+        .folded section {
+            flex-grow: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 0;
+        }
+
+        .menu {
+            background-color: whitesmoke;
+            user-select: none;
+        }
+
+        .menu > * {
+            display: inline-block;
+            padding: 4px 6px;
+            cursor: pointer;
+        }
+
+        .menu > *:hover {
+            background-color: lightgray;
+        }
+
+        .col {
+            position: relative;
+        }
+
+        .h-resize:hover, .resize:hover {
+            background-color: #0e9;
+        }
+
+        .resize {
+            width: 2px;
+            background-color: silver;
+            cursor: col-resize;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .h-resize {
+            background-color: darkgrey;
+            cursor: row-resize;
+        }
+
+        .hist, .selected, .submenu .menu {
+            background-color: gainsboro;
+        }
+
+        .menu, .submenu {
+            height: 0;
+        }
+
+        .submenu.visible {
+            display: table-row;
+        }
+
+        .dirty .publish {
+            background-color: aquamarine;
+        }
+    </style>
+    <template id="tpl-site">
+        <header>
+            <nav>
+                <a href="#index">home</a>
+                <a href="#+ls">entries</a>
+            </nav>
+        </header>
+        {page}
+        <footer>
+            <p><button onclick="edit()">edit</button></p>
+        </footer>
+    </template>
+    <template id="tpl-entry">
+        <main>
+            {content}
+            {backlinks}
+        </main>
+    </template>
+    <template id="tpl-not-found">
+        <main>
+            <p>The entry could not be found.</p>
+        </main>
+    </template>
+    <template id="tpl-editor">
+        <datalist id="files"></datalist>
+        <table>
+            <tr>
+                <td colspan="2" class="menu">
+                    <span class="new">new</span>
+                    <span class="index">index</span>
+                    <span class="ls">ls</span>
+                    <span class="ref">ref</span>
+                    <span class="mv">mv</span>
+                    <span class="del">del</span>
+                    <span class="orph">orph</span>
+                    <span class="import">import</span>
+                    <span class="export">export</span>
+                    <span class="reset">reset</span>
+                    <span class="view">view</span>
+                    <span class="save">save</span>
+                    <span class="publish">publish</span>
+                </td>
+            </tr>
+            <tr id="m-import" class="submenu">
+                <td colspan="2" class="menu"><input type="file" id="import" value=""></td>
+            </tr>
+            <tr>
+                <td class="col">
+                    <div class="active column"></div>
+                    <div class="resize"></div>
+                </td>
+                <td>
+                    <div class="column"></div>
+                </td>
+            </tr>
+        </table>
+        <input list="files" spellcheck="false" id="search" autocomplete="off"/>
+    </template>
+</head>
+<body>
+<div id="edit"></div>
+<div id="site"></div>
+<script id="store">let store = {
+    index: {
+        c: '# Welcome to your site!\n\nPress the edit button to start editing.',
+        m: "2024-08-10"
+    }
+};</script>
+<script id="moka">
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Helpers
+
+    const url = (...f) => [window.location.href.split('#')[0], ...f].join('');
+    const $ = elt => document.querySelector(elt);
+    const $$ = elt => document.querySelectorAll(elt);
+    const $$active = elt => $panel => ($panel && $panel.querySelector(elt)) || $('.active-p ' + elt);
+    const $name = $panel => $$active('.name')($panel);
+    const $content = $panel => $$active('.content')($panel);
+    const t$ = e => e.target;
+    const closest$ = (e, sel) => t$(e).closest(sel);
+    const $search = () => $('#search');
+    const $panel = () => $('.active-p');
+    const fc = () => $content().focus();
+    const hasCls = ($elt, cls) => $elt.classList.contains(cls);
+    const fcPane = (cond, name) => setActive(Array.from($$('section')).find(cond) || createPane(name));
+    const fcnPane = (name, focus) => (fcPane(p => $name(p).value === name, name), focus && fc());
+    const dt = t => t.toISOString().split('T')[0];
+    const togCls = (cls, sel, $elt) => ($$(sel).forEach((e) => e.classList.remove(cls)), $elt.classList.add(cls));
+    const setActive = $section => togCls('active-p', 'section', $section);
+    const closeSearch = () => ($search().classList.remove('searching'), fc());
+    const isChordNav = e => e.metaKey || e.ctrlKey;
+    const isChordNavBlank = e => isChordNav(e) && e.altKey;
+    const navBlank = name => fcnPane(name, true);
+    const basename = path => path.split('/').pop().split('.').shift();
+    const cLoad = k => ($name() || createPane(), load(k));
+    const refPane = name => fcPane(p => $name(p).value.startsWith('+ref'), name);
+    const page = base => decodeURIComponent(window.location.hash.slice(1).split('$')[0]) || base;
+    const rmCls = ($elt, cls) => $elt.forEach(e => e.classList.remove(cls));
+    const t = (...args) => args.join('\n');
+    const ta = arr => t(...arr);
+    const ln = t => `[[${t}]]`;
+    const loadF = (...args) => (load(...args), fc());
+    const htmlBlog = e => t('<ul>', ta(e.map(([k, v]) => `<li><time>${v.m}</time> <a href="#${k}">${k}</a>`)), '</ul>');
+
+    function makeElt(elt, cls = [], attrs = [], html = '', value = '') {
+        let e = document.createElement(elt);
+        cls.forEach(c => e.classList.add(c));
+        Object.entries(attrs).forEach(i => e.setAttribute(...i));
+        e.innerHTML = html;
+        e.value = value;
+        return e;
+    }
+
+    function download(d, n, m) {
+        const l = makeElt('a');
+        l.download = n;
+        l.href = window.URL.createObjectURL(new Blob([d], {type: m}));
+        document.body.appendChild(l);
+        l.click();
+        document.body.removeChild(l);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // store
+
+    const storeGet = k => (store[k] && store[k].c) || '';
+    const storeGetMod = k => store[k].m;
+    const storeDel = k => delete store[k];
+    const storeEntries = () => Object.entries(store).sort((a, b) => b[1].m < a[1].m ? -1 : 1);
+    const isStoreKey = k => Object.keys(store).includes(k);
+    const storeClear = () => store = {};
+
+    function storeSet(k, v, m) {
+        if (isStoreKey(k) && v === storeGet(k, v)) return;
+        $('#edit').classList.add('dirty');
+        store[k] = {c: v, m: m || dt(new Date())};
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Core
+
+    let paneID = 0;
+    const history = {};
+
+    const ls = () => ta(storeEntries().map(([k]) => ln(k)));
+    const filterStore = (fn, m) => storeEntries().map(([k, v]) => fn(k, v.c, m(v.c))).filter(Boolean);
+    const backlinks = str => filterStore((k, v, m) => m.length && ln(k), v => v.split('\n').filter(l => l.includes(ln(str))));
+    const lookup = str => ta(filterStore((k, v, m) => m.length && t(ln(k), '----------', ...m, ''), v => v.split('\n').filter(l => l.includes(str))));
+    const orph = () => ta(filterStore((k, v, m) => m.length && t(ln(k), '----------', ...m.map(ln), ''), v => [...v.matchAll(/\[\[([\w\.\-]+)\]\]/g)].map(match => match[1]).filter(e => !storeGet(e))))
+    const mv = (before, after) => storeEntries().forEach(([k, v]) => storeSet(k, v.c.replaceAll(ln(before), ln(after))));
+    const insert = text => document.execCommand('insertText', false, text);
+
+    function save() {
+        let name = $name().value;
+        let content = $content().value;
+        if (!name || name[0] === '+') return;
+        $panel().dataset['name'] = name;
+        storeSet(name, content);
+        refresh();
+    }
+
+    const saveD = ((fn, ms) => {
+        let timeout;
+        return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => fn(...args), ms);
+        }
+    })(save, 200);
+
+    function updateHistory(name) {
+        let cname = $panel().dataset['name'];
+        if (!name || name === cname) return;
+        hpush(hist().back, cname);
+        hist().forward = [];
+    }
+
+    function load(name, noHist) {
+        if (!name) {
+            $name().value = '', $content().value = '';
+            return;
+        }
+        !noHist && updateHistory(name)
+        if (name === '+orph') $content().value = orph();
+        else if (name.startsWith('+ls')) $content().value = ls(name.split(':')[1]);
+        else if (name.startsWith('+search')) $content().value = name.split(':')[1] ? lookup(name.split(':')[1]) : '';
+        else if (name.startsWith('+ref')) $content().value = name.split(':')[1] ? lookup(ln(name.split(':')[1])) : '';
+        else $content().value = storeGet(name);
+        $name().value = name;
+        $panel().dataset['name'] = name;
+        $panel().querySelector('.back').classList.toggle('hist', !!hist().back.length);
+        $panel().querySelector('.forward').classList.toggle('hist', !!hist().forward.length);
+    }
+
+    function refresh() {
+        const $elt = $('#files');
+        $elt.innerHTML = '';
+        storeEntries().forEach(([k]) => $elt.appendChild(makeElt('option', [], {}, null, k)))
+    }
+
+    const createHistory = paneID => history[paneID] = {back: [], forward: []};
+    const removeHistory = paneID => delete history[paneID];
+    const hist = () => history[$panel().dataset['id']];
+    const hpush = (h, name) => h[h.length - 1] !== name && h.push(name);
+
+    function deletePane($pane) {
+        removeHistory($pane.dataset['id']);
+        $pane.remove();
+    }
+
+    function createPane(name) {
+        const header = makeElt('header');
+        header.append(
+            makeElt('span', ['h-resize', 'action'], {}, ''),
+            makeElt('span', ['back', 'action'], {}, '<'),
+            makeElt('span', ['forward', 'action'], {}, '>'),
+            makeElt('input', ['name'], {list: 'files', autocomplete: 'off'}),
+            makeElt('span', ['max', 'action'], {}, '+'),
+            makeElt('span', ['move', 'action'], {}, '~'),
+            makeElt('span', ['close', 'action'], {}, 'x')
+        );
+        const id = paneID++;
+        const section = makeElt('section');
+        const article = makeElt('article', ['body'], {});
+        article.append(makeElt('textarea', ['content'], {spellcheck: false, onkeyup: 'saveD()'}));
+        section.setAttribute('data-id', '' + id);
+        section.append(
+            header,
+            article
+        );
+        createHistory(id);
+        $(".column.active").appendChild(section);
+        setActive(section);
+        loadF(name);
+        return section;
+    }
+
+    function link(textarea) {
+        const text = textarea.value;
+        const pos = textarea.selectionStart;
+        let start, end;
+
+        for (start = pos - 1; start > -1 && text[start] !== '['; start--) {
+            if (/\n/.test(text[start]) || text[start] === ']') return null;
+        }
+        if (start === -1) return null;
+
+        for (end = pos; end < text.length && text[end] !== ']'; end++) {
+            if (/\n/.test(text[end]) || text[end] === '[') return null;
+        }
+        if (end === text.length) return null;
+
+        return text.substring(start + 1, end);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Menu
+
+    function selectMenu($m, $n) {
+        let t = hasCls($m, 'selected')
+        rmCls($$('.menu > *'), 'selected');
+        rmCls($$('.submenu'), 'visible');
+        $m.classList.toggle('selected', !t);
+        $n.classList.toggle('visible', !t);
+    }
+
+    function menuMv() {
+        let prev = $panel().dataset['name'];
+        if (!prev) return;
+        let n = prompt('rename to:');
+        if (!n) return;
+        mv(prev, n);
+        storeDel(prev);
+        $name().value = n;
+        save();
+        $prevPanel = $panel();
+        $$('section').forEach($pane => {
+            setActive($pane);
+            load($name().value, false);
+        })
+        setActive($prevPanel);
+        refresh();
+    }
+
+    const quine = () => t('<!DOCTYPE html>',
+        `<head>${document.head.innerHTML}</head>`,
+        '<body>',
+        '<div id="edit"></div>',
+        `<div id="site"><h1>${$('title').innerText}</h1>${htmlBlog(storeEntries().slice(0, 10))}</div>`,
+        `<script id="store">let store = ${JSON.stringify(store).replaceAll('</' + 'script', "' + '</' + 'script' + '") + ';'};${'</'}script>`,
+        `<script id="moka">${$('script#moka').innerHTML + '</'}script>`,
+        '</body>');
+
+    function menuSave() {
+        $('#edit').classList.remove('dirty');
+        download(quine(), basename(url()) + '.html', 'text/html');
+    }
+
+    function menuPublish() {
+        let fd = new FormData();
+        fd.append('file', quine());
+        fetch(url(), {method: 'POST', body: fd})
+            .then(r => {
+                if (r.status !== 200) throw new Error(`couldn't publish ${r.status}`);
+            })
+            .then(() => alert('published'), $('#edit').classList.remove('dirty'))
+            .catch(alert);
+    }
+
+    function menuDel() {
+        let name = $name().value;
+        if (name && confirm('delete ' + name + '?')) {
+            storeDel(name);
+            refresh();
+            load('+ref:' + name, true);
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Pane actions
+
+    function paneMax(e) {
+        if (closest$(e, 'section').classList.contains('maxed')) {
+            closest$(e, 'section').classList.remove('maxed');
+            closest$(e, '.column').classList.remove('folded');
+        } else {
+            rmCls(closest$(e, '.column').querySelectorAll('section'), 'maxed');
+            closest$(e, 'section').classList.add('maxed');
+            closest$(e, '.column').classList.add('folded');
+        }
+    }
+
+    function paneMove(e) {
+        let $c;
+        $$('.column').forEach(c => (c !== closest$(e, '.column')) && ($c = c));
+        $c.appendChild(closest$(e, 'section'));
+    }
+
+    function menuView() {
+        let p = $name().value;
+        window.history.pushState(null, null, url('#', p))
+        show(p);
+        toggleMode(false);
+    }
+
+    function paneClose(e) {
+        deletePane(closest$(e, 'section'));
+        if ($('section')) {
+            setActive($('section'));
+            fc();
+        }
+    }
+
+    function paneHist(from, to) {
+        return function (e) {
+            if (!from.length) return;
+            let name = from.pop();
+            if (isChordNavBlank(e)) {
+                from.push(name);
+                createPane();
+            } else if (isChordNav(e)) {
+                from.push(name);
+                setActive($prevPanel);
+                loadF(name);
+            } else {
+                hpush(to, $panel().dataset['name']);
+            }
+            load(name, true);
+        }
+    }
+
+    function handleSearch(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isChordNavBlank(e)) {
+            navBlank(t$(e).value);
+            closeSearch();
+        } else if (isChordNav(e)) {
+            if (!$content()) createPane();
+            closeSearch();
+            load(t$(e).value);
+        } else {
+            if (!$content()) return;
+            closeSearch();
+            if (!isStoreKey(t$(e).value)) {
+                storeSet(t$(e).value, '');
+                refresh();
+            }
+            insert(ln(t$(e).value));
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // xtx
+
+    const sref = l => l.replace(/{/g, "&#123;").replace(/}/g, "&#125;").replace(/#\[\[([^\n]+?)\]\]/g, '#$1').replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\[\[([^\n]+?)\]\]/g, (match, p1) => `<a href="#${p1}">${p1}</a>`);
+    const escapeHtml = unsafe => unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+
+    function toHTML(text) {
+        let isList = false, isPre = false, rv = '';
+        const lines = text.split('\n');
+        for (let i = 0; i < lines.length; i++) {
+            let l = lines[i];
+            if (l.startsWith('# ')) rv += `<h1>${sref(l.slice(2))}</h1>`;
+            else if (l.startsWith('## ')) rv += `<h2>${sref(l.slice(3))}</h2>`;
+            else if (l.startsWith('### ')) rv += `<h3>${sref(l.slice(4))}</h3>`;
+            else if (l.startsWith('> ')) rv += `<blockquote>${sref(l.slice(2))}</blockquote>`;
+            else if (l.startsWith('* ')) {
+                !isList && (isList = true, rv += '<ul>');
+                rv += `<li>${sref(l.slice(2))}</li>`;
+            } else if (l.startsWith('  ')) {
+                !isPre && (isPre = true, rv += '<pre>');
+                rv += escapeHtml(l.slice(2)) + '\n';
+            } else {
+                isList && (isList = false, rv += '</ul>');
+                isPre && (isPre = false, rv += '</pre>');
+                l && (rv += `<p>${sref(l)}</p>`);
+            }
+        }
+        isList && (rv += '</ul>');
+        isPre && (rv += '</pre>');
+        return rv;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Routing
+
+    const toggleView = showEditor => ($('#css-site').sheet.disabled = $('#site').style.display = showEditor ? 'none' : '', $('#css-editor').sheet.disabled = $('#edit').style.display = showEditor ? '' : 'none');
+    const tpl = (name, args = {}) => Object.entries(args).reduce((r, [k, v]) => r.replace(`{${k}}`, v), $(`#tpl-${name}`).innerHTML);
+    const restore = () => (show(page()), toggleView($('#site').style.display === ''));
+
+    function toggleEdit() {
+        if ($('#edit').innerHTML === '') return toggleMode(true);
+        restore();
+        fcnPane(page('index'), true);
+    }
+
+    function edit() {
+        let name = page('index');
+        if (window.location.hash) window.history.pushState(null, null, url('#', name, '$'));
+        else window.history.pushState(null, null, url('#index$'));
+        toggleEdit();
+    }
+
+    function show(name) {
+        let content;
+        if (name === '+ls') content = htmlBlog(storeEntries());
+        else if (!isStoreKey(name)) content = tpl('not-found');
+        else {
+            const bl = ta(backlinks(name).map(sref).map(l => `<li>${l}</li>`));
+            content = tpl('entry', {
+                content: toHTML(storeGet(name)),
+                backlinks: bl ? `<aside><h2>Backlinks</h2><ul>${bl}</ul>` : '',
+                edited: storeGetMod(name)
+            })
+        }
+        $('#site').innerHTML = tpl('site', {page: content});
+    }
+
+    function toggleMode(isEditor) {
+        toggleView(isEditor);
+        isEditor && start();
+    }
+
+    function start() {
+        $('#edit').innerHTML = tpl('editor');
+        refresh();
+        createPane(page('index'));
+    }
+
+    function handleRoute() {
+        if (location.hash.endsWith('$')) return toggleEdit();
+        toggleMode(false);
+        show(page('index'));
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Listeners
+
+    let $prevPanel, $resize, $hresize, $hroffset;
+
+    window.addEventListener('beforeunload', e => $('.dirty') && (e.preventDefault(), e.returnValue = true));
+    document.addEventListener('mouseup', () => ($resize = null, $hresize = null));
+    window.addEventListener("popstate", handleRoute);
+
+    document.addEventListener('mousedown', function (e) {
+        if (hasCls(t$(e), 'resize')) {
+            e.preventDefault();
+            $resize = closest$(e, 'td');
+        } else if (hasCls(t$(e), 'h-resize')) {
+            e.preventDefault();
+            if (closest$(e, 'section').previousSibling) {
+                $hresize = closest$(e, 'section').previousSibling.querySelector('.body');
+                $hroffset = e.y - t$(e).getBoundingClientRect().top;
+            }
+        }
+        $prevPanel = $panel() || $prevPanel;
+        let section = closest$(e, 'section');
+        section && setActive(section);
+        let column = closest$(e, '.column');
+        if (column && (!e.altKey && !e.metaKey && !e.ctrlKey)) togCls('active', '.column', column);
+    });
+
+    document.addEventListener('mousemove', function (e) {
+        if ($resize) $resize.width = e.clientX;
+        else if ($hresize) {
+            const $sib = $hresize.closest('section').nextSibling;
+            const rect = $hresize.getBoundingClientRect();
+            let h = e.y - rect.top - $hroffset < 0 ? 0 : e.y - rect.top - $hroffset;
+            if ($sib && $sib.nextSibling) {
+                let diff = h - rect.height;
+                const $sArt = $sib.querySelector('.body');
+                const sRect = $sArt.getBoundingClientRect();
+                if (sRect.height - diff <= 0) {
+                    $hresize.style.height = `${+$hresize.style.height.split('px')[0] + sRect.height}px`;
+                    $sArt.style.height = `0px`;
+                    return;
+                }
+                if (h >= 0) $sArt.style.height = `${sRect.height - diff}px`;
+            }
+            $hresize.style.height = `${h}px`;
+        }
+    })
+
+    document.addEventListener('click', function (e) {
+        // @formatter:off
+        switch (t$(e).classList[0]) {
+            case 'new': createPane(); return;
+            case 'index': cLoad('index'), fc(); return;
+            case 'ls': cLoad('+ls'); return;
+            case 'reset': confirm('delete everything?') && (storeClear(), start()); return;
+            case 'save': menuSave(); return;
+            case 'publish': menuPublish(); return;
+            case 'ref': $name() && refPane('+ref:' + $name().value); return;
+            case 'mv': menuMv(); return;
+            case 'del': menuDel(); return;
+            case 'import': selectMenu($('.import'), $('#m-import')); return;
+            case 'orph': cLoad('+orph'); return;
+            case 'style': cLoad('+style'); return;
+            case 'view': menuView(e); return;
+            case 'export': download(JSON.stringify(store), basename(url()) + '.json', 'text/json'); return;
+            case 'close': paneClose(e); return;
+            case 'max': paneMax(e); return;
+            case 'move': paneMove(e); return;
+            case 'back': paneHist(hist().back, hist().forward)(e); return;
+            case 'forward': paneHist(hist().forward, hist().back)(e); return;
+        }
+        // @formatter:on
+        if (isChordNavBlank(e) && e.button === 0) {
+            link($content()) && navBlank(link($content()));
+        } else if (isChordNav(e) && e.button === 0) {
+            let name = link($content());
+            if (name) {
+                setActive($prevPanel);
+                loadF(name);
+            }
+        }
+    });
+
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            if (t$(e).id === 'search') {
+                handleSearch(e);
+            } else if (isChordNav(e)) {
+                $search().value = '';
+                $search().classList.add('searching');
+                $search().focus();
+            } else if (hasCls(e.target, 'name')) {
+                e.preventDefault();
+                loadF($name().value);
+            }
+        } else if (e.key === 'Escape' && e.target.id === 'search') {
+            $search().classList.remove('searching');
+            fc();
+        }
+    });
+
+    document.addEventListener('change', e => {
+        if (t$(e).type !== 'file') return;
+        const file = e.target.files[0];
+        const r = new FileReader();
+        r.onload = e => {
+            let data = JSON.parse('' + e.target.result);
+            Object.keys(data).forEach(k => storeSet(k, data[k].c, data[k].m));
+            start();
+        }
+        r.readAsText(file);
+        refresh();
+    })
+
+    handleRoute();
+</script>
+</body>
