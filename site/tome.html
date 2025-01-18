@@ -1,26 +1,3 @@
-<!--
-MIT License
-
-Copyright (c) m15o
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
--->
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -33,10 +10,16 @@ SOFTWARE.
         }
         body {
             max-width: 600px;
-            background-color: #000000;
+            background-color: #111111;
+            background-image: url("./assets/scanlines.png");
+            background-repeat: repeat-x repeat-y;
             padding: 8px;
             margin: 0 auto;
             font-family: RobotoMono;
+                     animation-duration: 0.01s;
+         animation-name: textflicker;
+         animation-iteration-count: infinite;
+         animation-direction: alternate;
         }
 
         p {
@@ -50,7 +33,7 @@ SOFTWARE.
 
         header h1 {
             font-size: 28px;
-            color: #431837;
+            color: #e18f89;
             display: inline-block;
             text-decoration: none;
             border: 2px solid #1f232e;
@@ -80,6 +63,15 @@ SOFTWARE.
             text-decoration: underline double #e18f89;
         }
 
+        li a {
+            color: #e8e3e3;
+            text-decoration: underline double #e18f89;
+        }
+
+        li {
+            color: #ffffff;
+        }
+
         pre {
             overflow: auto;
             background: #000000;
@@ -91,6 +83,26 @@ SOFTWARE.
             flex-flow: row wrap;
             justify-content: space-evenly;
         }
+
+        img#scalines {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+
+        time {
+            display: none;
+        }
+
+  @keyframes textflicker {
+    from {
+      text-shadow: 0.5px 0 0 #e1c0a9, -1px 0 0 #a53551;
+    }
+    to {
+      text-shadow: 1px 0.25px 1px #e1c0a9, -1px -0.5px 2px #a53551;
+    }
+  }
+        
     </style>
     <style id="css-editor">
         html, body, #edit, .column, textarea, table, td {
@@ -274,7 +286,7 @@ SOFTWARE.
     <template id="tpl-editor">
         <datalist id="files"></datalist>
         <table>
-            <tr>
+            <tbody><tr>
                 <td colspan="2" class="menu">
                     <span class="new">new</span>
                     <span class="index">index</span>
@@ -303,19 +315,19 @@ SOFTWARE.
                     <div class="column"></div>
                 </td>
             </tr>
-        </table>
-        <input list="files" spellcheck="false" id="search" autocomplete="off"/>
+        </tbody></table>
+        <input list="files" spellcheck="false" id="search" autocomplete="off">
     </template>
 </head>
 <body>
+    
 <div id="edit"></div>
-<div id="site"></div>
-<script id="store">let store = {
-    index: {
-        c: '# Welcome to your site!\n\nPress the edit button to start editing.',
-        m: "2024-08-10"
-    }
-};</script>
+<div id="site">
+    <h1>encountering the anomaly</h1><ul>
+<li><time>2025-01-18</time> <a href="#index">index</a>
+<li><time>2025-01-18</time> <a href="#20080916">20080916</a>
+</ul></div>
+<script id="store">let store = {"20080916":{"c":"# 2008 09 16\n\n## i can't get rid of this thing\n\nTT-TT seriously why'd this thing have to get stuck to *me.* i swear it's followed be through like two moves and a string of bad relationships. just wanna get rid of it, weird shit keeps happening to me","m":"2025-01-18"},"index":{"c":"# what is this\n\n## an introduction i guess\n\nso i'm liv, i found this thing one day... maybe found isn't the right word... it found me? appeared? idk. it showed up one day and i figured it might be best to put all this down somewhere so someone sees it someday.\n\n### latest\n\n* [[20080916]]","m":"2025-01-18"}};;</script>
 <script id="moka">
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Helpers
