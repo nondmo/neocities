@@ -27,12 +27,33 @@ h1 {
     line-height: 24pt;
 }
 
-h1#enter {
+p#enter {
     font-size: 24pt;
     line-height: 24pt;
     font-family: Handy;
-    text-decoration: none;
     text-shadow: none;
+    position: absolute;
+    display:block;
+    z-index: 0;
+    padding-top: 450px;
+    padding-left: 690px;
+}
+
+a#entrance {
+        font-size: 24pt;
+            line-height: 24pt;
+            font-family: Handy;
+    text-decoration: wavy;
+    color: d09639;
+}
+
+img#voyager {
+    display: block;
+    transform: rotate(35deg);
+    padding-top: 150px;
+    padding: 270px;
+    position: absolute;
+    z-index: -1;
 }
 
 h2 {
