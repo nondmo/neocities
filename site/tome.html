@@ -25,7 +25,7 @@ SOFTWARE.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>moka</title>
+    <title>encountering the anomaly</title>
     <style id="css-site">
         @font-face {
             font-family: RobotoMono;
@@ -45,14 +45,29 @@ SOFTWARE.
 
         h1 {
             color: #e18f89;
+            font-size: 24px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #431837;
+            display: inline-block;
+            text-decoration: none;
+            border: 2px solid #1f232e;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            width: 100%;
+            text-align: center;
         }
 
         h2 {
             color: #a53551;
+            font-size: 24px;
         }
 
         h3 {
             color: #e1c0a9;
+            font-size: 20px;
         }
 
         header a {
@@ -69,6 +84,12 @@ SOFTWARE.
             overflow: auto;
             background: #000000;
             padding: 10px;
+        }
+
+        nav {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
         }
     </style>
     <style id="css-editor">
@@ -226,10 +247,13 @@ SOFTWARE.
     </style>
     <template id="tpl-site">
         <header>
+            <p>&nbsp;</p>
+            <h1>encountering the anomaly</h1>
             <nav>
                 <a href="#index">home</a>
                 <a href="#+ls">entries</a>
             </nav>
+            <p>&nbsp;</p>
         </header>
         {page}
         <footer>
