@@ -88,8 +88,8 @@ a {
     font-size: 9pt;
     font-family: RobotoMono;
     font-weight: bold;
-    color: #d09639;
-    text-decoration: wavy;
+    color: #fbc774;
+    text-decoration: underline wavy;
 }
 
 img {
@@ -150,7 +150,7 @@ li {
     grid-row-start: 5;
     max-height: 193px;
     max-width: 200px;
-    overflow: none;
+    overflow: hidden;
     text-align: right;
     background-image: url("./assets/bgs/black_paper.png");
     padding: 15px;
@@ -192,6 +192,15 @@ img#cassette {
     display: table-cell;
 }
 
+a.nav {
+    font-size: 9pt;
+    font-family: Handy;
+    letter-spacing: 3px;
+    color: #fbc774;
+    text-decoration: none;
+    font-weight: normal;
+}
+
 .statusbox {
     font-size: 9pt;
     font-family: RobotoMono;
@@ -207,6 +216,7 @@ img#cassette {
 
 #statuscafe-username, a {
     font-family: Handy;
+    text-decoration: none;
 }
 
 #statuscafe-content {
@@ -229,6 +239,53 @@ img#cassette {
 .handy {
     font-size: 9pt;
     font-family: Handy;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: fit-content;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 3px;
+    border-radius: 6px;
+    font-family: RobotoMono;
+    font-size: 9pt;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #000; transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
 
 
