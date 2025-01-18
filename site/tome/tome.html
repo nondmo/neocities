@@ -6,12 +6,12 @@
     <style id="css-site">
         @font-face {
             font-family: RobotoMono;
-            src: url("./assets/robotomono.ttf") format("truetype");
+            src: url("robotomono.ttf") format("truetype");
         }
         body {
             max-width: 600px;
             background-color: #111111;
-            background-image: url("./assets/scanlines.png");
+            background-image: url("scanlines.png");
             background-repeat: repeat-x repeat-y;
             padding: 8px;
             margin: 0 auto;
@@ -24,6 +24,11 @@
 
         p {
             color: #ffffff;
+        }
+
+        p.warn {
+            color: #666666;
+            font-size: 12pt;
         }
 
         h1 {
@@ -96,10 +101,10 @@
 
   @keyframes textflicker {
     from {
-      text-shadow: 0.5px 0 0 #e1c0a9, -1px 0 0 #a53551;
+      text-shadow: 0px 0 0 #00ff00, -0px 0 0 #ff00ff;
     }
     to {
-      text-shadow: 1px 0.25px 1px #e1c0a9, -1px -0.5px 2px #a53551;
+      text-shadow: 3px 0.5px 2px #00ff00, -2px -1.5px -3px #ff00ff;
     }
   }
         
