@@ -17,10 +17,22 @@ body {
     color: #ccc;
 }
 
+body#enter {
+    background-image: url("./assets/bgs/stars.gif");
+}
+
 h1 {
     text-shadow: 1px 1px 2px #fbc774cc;
     font-size: 24pt;
     line-height: 24pt;
+}
+
+h1#enter {
+    font-size: 24pt;
+    line-height: 24pt;
+    font-family: Handy;
+    text-decoration: none;
+    text-shadow: none;
 }
 
 h2 {

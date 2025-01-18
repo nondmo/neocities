@@ -43,7 +43,7 @@ Resources
     *lightKakera|lightKakeras
         name:Light Kakera|Light Kakera
         desc:Light kakera are rare, spend them wisely!
-        icon:kakeraIcons[1,0]
+        icon:kakeraIcons[0,1]
         class:noBackground
         hidden when 0
 
