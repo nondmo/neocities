@@ -15,6 +15,7 @@ body {
     font-family: Handy;
     background-image: url("./assets/bgs/crissXcross.png");
     color: #ccc;
+    overflow: hidden;
 }
 
 body#enter {
