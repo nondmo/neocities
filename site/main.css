@@ -40,6 +40,11 @@ p#enter {
     padding-left: 690px;
 }
 
+p.handysmall {
+    font-size: 7pt;
+    font-family: Handy;
+}
+
 a#entrance {
         font-size: 24pt;
             line-height: 24pt;
@@ -180,9 +185,9 @@ li {
 }
 
 div#tapes {
-    font-size: 9pt;
+    font-size: 7pt;
     span#lastfm {
-        font-size: 9pt;
+        font-size: 7pt;
     }
 }
 
@@ -191,6 +196,15 @@ img#cassette {
     height: auto;
     vertical-align: bottom;
     display: table-cell;
+}
+
+.column a {
+    font-size: 9pt;
+    font-family: Handy;
+    letter-spacing: 1px;
+    color: #fbc774;
+    text-decoration: none;
+    font-weight: normal;
 }
 
 a.nav {
@@ -203,7 +217,7 @@ a.nav {
 }
 
 .statusbox {
-    font-size: 9pt;
+    font-size: 7pt;
     font-family: RobotoMono;
 }
 
@@ -216,6 +230,7 @@ a.nav {
 }
 
 #statuscafe-username, a {
+    font-size: 7pt;
     font-family: Handy;
     text-decoration: none;
 }
@@ -240,6 +255,10 @@ a.nav {
 .handy {
     font-size: 9pt;
     font-family: Handy;
+}
+
+.bottombar p {
+    font-size: 7pt;
 }
 
 
