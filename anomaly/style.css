@@ -1,0 +1,240 @@
+/* color palette here: https://lospec.com/palette-list/tnr-8 */
+/* font families */
+@font-face {
+    font-family:'cako';
+    src: url(./assets/Cako-Regular.ttf);
+}
+@font-face {
+    font-family:'spacemono';
+    src: url(./assets/SpaceMono-Regular.ttf);
+}
+@font-face {
+    font-family: 'mulish';
+    src: url(./assets/Mulish-VariableFont_wght.ttf);
+}
+body {
+    background:fixed;
+    background-color: #191e23;
+}
+
+/* crt animation */
+.crt::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+@keyframes flicker {
+    0% {
+    opacity: 0.27861;
+    }
+    5% {
+    opacity: 0.34769;
+    }
+    10% {
+    opacity: 0.23604;
+    }
+    15% {
+    opacity: 0.10626;
+    }
+    20% {
+    opacity: 0.18128;
+    }
+    25% {
+    opacity: 0.10626;
+    }
+    30% {
+    opacity: 0.18128;
+    }
+    35% {
+    opacity: 0.23604;
+    }
+}
+.crt::after {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(18, 16, 16, 0.1);
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+    animation: flicker 0.15s infinite;
+}
+  
+/* absolute position content boxes - right on top of background */
+containment {
+    position: absolute;
+    z-index: 0;
+    margin-top: 160px;
+    margin-left: 655px;
+    width: 700px;
+    height: 400px;
+    background-color: #1f2545;
+    border: 1px dotted black;
+    overflow: scroll;
+    padding: 15px;
+}
+
+map {
+    position: absolute;
+    z-index: 0;
+    margin-top: 160px;
+    margin-left: 1390px;
+    width: 170px;
+    height: 430px;
+    background-color:#1f2545;
+    border: 1px dotted black;
+    overflow: scroll;
+}
+
+/* text styles */
+p.cakomarqueer {
+    font-family: cako;
+    font-size: 28pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: right;
+    color: #e95050;
+}
+p.spacemonomarqueer {
+    font-family: spacemono;
+    font-size: 28pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: right;
+    color: #e95050;
+}
+p.cakomarqueel {
+    font-family: cako;
+    font-size: 28pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: left;
+    color: #e95050;
+}
+p.spacemonomarqueel {
+    font-family: spacemono;
+    font-size: 28pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: left;
+    color: #e95050;
+}
+p.cakobyliner {
+    font-family: cako;
+    font-size: 24pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: right;
+    color: #a43838;
+}
+p.spacemonobyliner {
+    font-family: spacemono;
+    font-size: 24pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: left;
+    color: #a43838;
+}
+p.cakobylinel {
+    font-family: cako;
+    font-size: 24pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: left;
+    color: #a43838;
+}
+p.spacemonobylinel {
+    font-family: spacemono;
+    font-size: 24pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: right;
+    color: #a43838;
+}
+p.cakotagliner {
+    font-family: cako;
+    font-size: 20pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: right;
+    color: #63374a;
+}
+p.spacemonotagliner {
+    font-family: spacemono;
+    font-size: 20pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: left;
+    color: #63374a;
+}
+p.cakotaglinel {
+    font-family: cako;
+    font-size: 20pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: left;
+    color: #63374a;
+}
+p.spacemonotaglinel {
+    font-family: spacemono;
+    font-size: 20pt;
+    line-height: 5px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: right;
+    color: #63374a;
+}
+p {
+    font-family: mulish;
+    font-size: 12pt;
+    color: #ffd7d7;
+}
+a {
+    font-family: spacemono;
+    font-size: 12pt;
+    color: #ff8d99;
+}
+li {
+    font-family: spacemono;
+    font-size: 12pt;
+    margin-left: 0;
+    list-style-type: "✧:-";
+    color: #e95050;
+}
+a.nav {
+    font-family: spacemono;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #ff8d99;
+}
+
+/* font classes - to add to spans and such */
+.cako {
+    font-family:'cako';
+}
+.spacemono {
+    font-family:'spacemono';
+}
