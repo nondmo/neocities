@@ -1,0 +1,168 @@
+/* import fonts */
+@font-face {
+    font-family: Handy;
+    src: url("./assets/handy.ttf") format("truetype");
+}
+@font-face {
+    font-family: RobotoMono;
+    src: url("./assets/robotomono.ttf") format("truetype");
+}
+
+/* body & container styles */
+body {
+    background-color: #0c0a1b;
+}
+
+.header {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+
+.nav {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex: 1 0 auto;
+    justify-content: space-evenly;
+    margin-bottom: 0;
+}
+
+.navitem {
+    border:2px solid #394c62;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    flex-grow: inherit;
+    justify-content: center;
+    text-align: center;
+    background-color: #222034;
+    padding-top: .25em;
+    padding-bottom: .25em;
+}
+
+.navitem.selected {
+    border:2px solid #6882b6;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    flex-grow: inherit;
+    justify-content: center;
+    text-align: center;
+    background-color: #222034;
+    padding-top: .25em;
+    padding-bottom: .25em;
+    text-transform: uppercase;
+}
+
+.container {
+    box-sizing:border-box;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    border:2px solid #6882b6;
+    border-top: none;
+    background-color: #626d83;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+/* text styles */
+h1 {
+    padding-left: 15px;
+    font-family: Handy;
+    font-size: 20pt;
+    color: #cbdbfc;
+}
+
+h2 {
+    padding-left: 15px;
+    font-family: Handy;
+    font-size: 16pt;
+    color: #83aa9c;
+}
+
+h3 {
+    padding-left: 15px;
+    font-family: Handy;
+    font-size: 12pt;
+    color: #394c62;
+}
+
+p {
+    color: #222034;
+}
+
+span.handy {
+    color: #222034;
+    font-family: Handy;
+    font-size: 10pt;
+}
+
+.container p {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #222034;
+    font-family: RobotoMono;
+    font-size: 10pt;
+}
+
+a {
+    color: #83aa9c;
+}
+
+a:hover {
+    color: #83aa9c;
+    background-color: #0c0a1b;
+}
+
+.navitem a {
+    color: #cbdbfc;
+    text-decoration: none;
+    font-family: Handy;
+    font-size: 10pt;
+}
+
+.navitem.selected a {
+    color: #cbdbfc;
+    text-decoration: underline dotted #83aa9c 2px;
+    letter-spacing: 2px;
+}
+
+li {
+    font-size: 10pt;
+    font-family: RobotoMono;
+    list-style-type: "⊹.˖";
+    margin-right: 15px;
+}
+
+.statusbox {
+    font-family: RobotoMono;
+    font-size: 10pt;
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-right: 15px;
+}
+
+#statuscafe {
+    color: #222034;
+    margin: 0;
+}
+
+#statuscafe-username {
+    font-family: Handy;
+}
+
+#statuscafe-username, a {
+    font-family: Handy;
+    text-decoration: none;
+}
+
+#statuscafe-content {
+    font-family: RobotoMono;
+    color: #222034;
+}
