@@ -10,8 +10,12 @@
 
 /* body & container styles */
 body {
-    background-image: url("./assets/bgs/crissXcross.png");
-    color: #ccc;
+    background-image: url('./assets/img/scanlines.png');
+    background-color: #111111;
+    font-family: RobotoMono;
+    color: #fff;
+    font-size: 8pt;
+    background-position: static;
 }
 
 .header {
@@ -32,9 +36,7 @@ body {
 }
 
 .navitem {
-    border:2px solid #444;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border:1px solid #444;
     flex-grow: inherit;
     justify-content: center;
     text-align: center;
@@ -44,9 +46,7 @@ body {
 }
 
 .navitem.selected {
-    border:2px dashed #444;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border:3px double #444;
     flex-grow: inherit;
     justify-content: center;
     text-align: center;
@@ -62,7 +62,7 @@ body {
     padding-bottom: .5em;
     border:2px solid #444;
     border-top: none;
-    background-image: url("./assets/bgs/black_paper.png");
+    background-color: #111111;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     max-width: 80%;
@@ -75,33 +75,21 @@ body {
 /* text styles */
 h1 {
     padding-left: 15px;
-    font-family: Handy;
     font-size: 20pt;
-    color: #fbc774;
 }
 
 h2 {
     padding-left: 15px;
-    font-family: Handy;
     font-size: 16pt;
-    color: #fbc774;
 }
 
 h3 {
-    padding-left: 15px;
-    font-family: Handy;
+    padding-left: 15px;;
     font-size: 12pt;
-    color: #fbc774;
 }
 
 p {
     color: #ffffff;
-}
-
-span.handy {
-    color: #ffffff;
-    font-family: Handy;
-    font-size: 10pt;
 }
 
 .container p {
@@ -113,23 +101,16 @@ span.handy {
 }
 
 a {
-    color: #fbc774;
-}
-
-a:hover {
-    color: #fbc774;
-    background-color: #0c0a1b;
+    color: #ffffff;
+    text-decoration: 1px underline solid #fff;
 }
 
 .navitem a {
-    color: #f8ddb1;
     text-decoration: none;
-    font-family: Handy;
     font-size: 10pt;
 }
 
 .navitem.selected a {
-    color: #fbc774;
     text-decoration: underline dotted #ffff 2px;
     letter-spacing: 2px;
 }
@@ -154,13 +135,8 @@ li {
     margin: 0;
 }
 
-#statuscafe-username {
-    font-family: Handy;
-}
-
 #statuscafe-username, a {
-    font-family: Handy;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 #statuscafe-content {
