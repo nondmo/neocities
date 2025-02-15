@@ -278,7 +278,7 @@ figure.curation-c img {
     transform: rotate(0deg);
     align-self: center;
     margin-top: 50px;
-    margin-left: 110px;
+    margin-left: 80px;
     max-width: 55%;
     border-top: 15px solid #cccccc;
     border-left: 15px solid #cccccc;
@@ -308,7 +308,7 @@ img.curation-c {
     transform: rotate(0deg);
     align-self: center;
     margin-top: 50px;
-    margin-left: 110px;
+    margin-left: 80px;
     max-width: 55%;
     border-top: 15px solid #cccccc;
     border-left: 15px solid #cccccc;
@@ -366,3 +366,7 @@ li {
     font-family: RobotoMono;
     list-style-type: '⊹₊ ݁.';
 }
+
+* {
+    cursor: url(./assets/cursor.cur), auto !important;
+} /* End https://www.cursors-4u.com */
