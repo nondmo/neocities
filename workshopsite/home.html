@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=0.1">
+</head>
+
+<body>
+    <div class="page">
+        <h1>Neocities 101: HTML, CSS, & the Personal Web</h1>
+        <h3>or: you, too, can make a website of your own!</h3>
+        <p>Here you can find the materials for our Discord workshop, including extended notes, live links, and collected resources that might be useful.</p>
+        <br>
+        <h1>Syllabus</h1>
+        <h2>Prerequisites</h2>
+        <ul>
+            <li>Create a <a href="http://neocities.org">Neocities</a> profile for yourself.</li>
+            <li>Think of the type of site you'd like to create.</li>
+            <li>Be curious and ready to learn!</li>
+        </ul>
+        <h2>What are HTML & CSS? &mdash; Finding & Using Documentation</h2>
+        <ul>
+            <li><strong>HTML:</strong> <u>H</u>yper<u>t</u>ext <u>M</u>arkup <u>L</u>anguage</li>
+                <ul><li><a href="https://www.w3schools.com/tags/default.asp">W3Schools Reference</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">MDN Documentation</a></li></ul>
+            <li><strong>CSS:</strong> <u>C</u>ascading <u>S</u>tyle <u>S</u>heets</li>
+                <ul><li><a href="https://www.w3schools.com/cssref/index.php">W3Schools Reference</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN Documentation</a></li></ul>
+        </ul>
+        <h2>Commonly Used Code Editors</h2>
+        <ul>
+            <li><a href="https://atom-editor.cc/">Atom</a></li>
+            <li><a href="https://code.visualstudio.com/">VS Code</a> | <a href="https://vscode.dev/">In Browser</a></li>
+            <li><a href="https://notepad-plus-plus.org/">Notepad++</a></li>
+        </ul>
+        <h2>Exercise 1: Visualize Your Site</h2>
+        <p>Designing a website is easier if you have a rough idea of what you want it to look like. Even if it's a visual picture, it helps you stay on track when designing. For this exercise, sketch out a very rough idea of what you have in mmind for your site.</p>
+        <ol>
+            <li>Spend a moment thinking of websites you like. Are there any elements or colors you want to emulate?</li>
+            <li>What do you want to include on your site? Showing off your art portfolio, yuor photography, and writing all have different layouts that may work better than others.</li>
+            <li>Create a sketch of your website to use later.</li>
+            <li><em>Bonus:</em> If you have multiple pages in mind already, try creating a site map!</li>
+        </ol>
+        <h2>Exercise 2: Create Your Homepage</h2>
+        <p>Put some content on your site! It's ok if it looks plain now, we'll be adding styles to it in the next exercise.</p>
+        <ol>
+            <li>Save this file: <a href="./assets/tut/index.html">index.html</a> and open it in your code editor.</li>
+            <li>Give your site a title and description inside the <code>&lt;head&gt;</code> tags.</li>
+            <li>Use tags to give your page a heading &lpar;<code>&lt;h1&gt;</code>&rpar;, some paragraph text &lpar;<code>&lt;p&gt;</code>&rpar;, and an image &lpar;<code>&lt;img src=""&gt;</code>&rpar;. You can copy the code inside <a href="./assets/tut/index.html">index.html</a> and modify it as needed.</li>
+            <li>Wrap all your content in a &lpar;<code>&lt;div&gt;</code>&rpar; element so you can modify it later.</li>
+            <li>Save your work & open it in a browser. Congrats! You've made a webpage.</li>
+        </ol>
+        <h2>Exercise 2.5: Add a Second Page</h2>
+        <p>Link between two pages and learn to expand your site as needed. Copy <a href="#">index.html</a> and give it a different name&mdash;remember it! Then add some content like you did before, and now add a link.</p>
+        <ol>
+            <li>Add this code to the bottom of your <a href="#">index.html</a>: <code>&lt;a href="(pagename).html"&gt;(page title)&lt;/a&gt;</code> and save the file.</li>
+            <li>Create another, similar link at the bottom of your new page, this time with this: <code>&lt;a href="index.html"&gt;home&lt;/a&gt;</code> and save the file.</li>
+            <li>Open up either page and make sure you can navigate back and forth between them.</li>
+        </ol>
+        <h2>Exercise 3: Style Your Homepage</h2>
+        <p>Now we'll be adding styles to our webpage. </p>
+        <ol> 
+            <li>Save this file: <a href="./assets/tut/style.css">style.css</a> and open it in your code editor.</li>
+            <li>Find the <code>body &lbrace; &rbrace;;</code> tag and take a look at the CSS properties.</li>
+            <li>Give your site a different font, font size, font color, and background color.</li>
+            <li>Find the <code>img &lbrace; &rbrace;;</code> tag and give it a size in pixels (px).</li>
+            <li>Find the <code>div.content &lbrace; &rbrace;;</code> class tag and add the following code:<br>
+                <code>display: block;<br>
+                    margin-left: auto;<br>
+                    margin-right: auto;
+                </code>
+            </li>
+            <li>Remember this code&mdash;it helps you center <code>&lt;div&gt;</code> elements no matter the screen size. You can choose the width (max-width) and height (height) with those properties.
+                <ul><li>For responsive images, use <code>max-width: ##%;</code> and <code>height: auto;</code></li></ul>
+            </li>
+            <li>Save your work & open it in a browser to make sure it looks like you want it to.</li>
+        </ol>
+        <h2>Exercise 4: Publish Your Site</h2>
+        <p>Ready to go live? Even if you're not, you can always edit it later! Your site is very much a living thing & will evolve a you add to it and learn more advanced code.</p>
+        <ol>
+            <li>Log into Neocities & edit your site, linked in the drop-down where your username is.</li>
+            <li>Find your files & drag them into the "Home" directory.</li>
+            <li>That's it! You can view your site at <a href="#">yourusername.neocities.org</a>.</li>
+        </ol>
+        <br>
+        <img src="./assets/img/totoro.gif">
+        <br>
+        <h2>Bonus: Resources, Code Snippets, and More</h2>
+        <p>Want to add a little more to your site? Maybe adapt a layout instead of building one from scratch? Here are a bunch of resources to help you out. When in doubt, copy and paste! And be sure to credit the source, if they request it.</p>
+        <h3>Premade Layouts & Generators</h3>
+        <ul>
+            <li><a href="https://goblin-heart.net/sadgrl/webmastery/layouts/">sadgrl.online</a></li>
+            <li><a href="https://goblin-heart.net/sadgrl/projects/layout-builder/">sadgrl's layout builder</a></li>
+            <li><a href="https://htmlcheatsheet.com/">HTML & CSS cheat sheet</a></li>
+            <li><a href="https://html5-templates.com/">basic HTML layouts</a></li>
+            <li><a href="https://html-css-js.com/css/generator/">CSS generators</a></li>
+        </ul>
+        <h3>Transparent Graphics</h3>
+        <ul>
+            <li><a href="https://rentry.co/mikopixels">mikopixels</a> - pngs, pixels, dividers, buttons</li>
+            <li><a href="https://mini-pixels-blog.tumblr.com/">mini-pixels-blog</a></li>
+            <li><a href="https://snailspng.tumblr.com/">snailspng</a></li>
+            <li><a href="https://transparentstickers.tumblr.com/">transparentstickers</a></li>
+            <li><a href="https://starryspngs.tumblr.com/">starrypngs</a></li>
+        </ul>
+        <h3>General Resource Hoards</h3>
+        <ul>
+            <li><a href="https://scripted.neocities.org/">scripted resources</a> - images, text effects, cursors, and more<br><em>has a ton of stuff!!</em></li>
+            <li><a href="https://kalachuchi.neocities.org/">kalachuchi</a> - pixel hoard, web fonts, and code snippets</li>
+            <li><a href="https://www.mf2fm.com/rv/">RV's free effects</a> - cursor & text effects</li>
+            <li><a href="https://goblin-heart.net/sadgrl/webmastery/webmaster-links">sadgrl's webmaster resources</a> - counters, fonts, domains, graphics, and more</li>
+            <li><a href="https://pochi.crd.co/">dia's codes</a> - text effcts, borders, animations</li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
